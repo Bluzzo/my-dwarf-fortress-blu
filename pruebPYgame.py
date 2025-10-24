@@ -3,6 +3,7 @@ import constantes
 from personajes import Personaje 
 from personajes import Gallina
 from personajes import Vaca
+from personajes import Cerdo
 from mundo import Mundo
 import csv
 
@@ -90,22 +91,37 @@ def ponerCasa(archivo, click_pos, nuevo_valor):
     world_data[fila][columna] = nuevo_valor
 
 #areas
-rangoGallina = pygame.Rect(100, 100, 400, 300)  # x, y, ancho, alto
+rangoGallina = pygame.Rect(150, 150, 200, 150)  # x, y, ancho, alto
 rangoVaca = pygame.Rect(100, 100, 400, 300) 
+rangoCerdo = pygame.Rect(150,125,300,100)
 
-gallina = Gallina(100,200,area = rangoGallina)
+
 gallinas = [
     Gallina(100, 100, area=rangoGallina),
     Gallina(300, 300, area=rangoGallina), 
-    Gallina(200, 400, area=rangoGallina)
+    Gallina(200, 400, area=rangoGallina),
+    Gallina(100,200,area = rangoGallina)
 ]
-gallinas.append(gallina)
+
 
 vacas = [
     Vaca(100, 100, area=rangoVaca),
     Vaca(300, 300, area=rangoVaca),
+    Vaca(200, 400, area=rangoVaca),
+    Vaca(300, 300, area=rangoVaca),
     Vaca(200, 400, area=rangoVaca)
 ]
+
+cerdos = [
+    Cerdo(100, 100, area=rangoCerdo),
+    Cerdo(300, 300, area=rangoCerdo),
+    Cerdo(200, 400, area=rangoCerdo),
+    Cerdo(300, 300, area=rangoCerdo),
+    Cerdo(200, 400, area=rangoCerdo)
+
+
+]
+
 
 ###############################
 run = True
@@ -135,7 +151,6 @@ while run:
         return fila, columna
 
     #moverme
-    gallina.update(dt)
     jugador.movimiento(deltaX,deltaY)
     jugador.update()
     
@@ -152,8 +167,11 @@ while run:
         gallina.update(dt)
         gallina.dibujar(ventana)
 
+    for cerdo in cerdos:
+        cerdo.update(dt)
+        cerdo.dibujar(ventana)
+
     jugador.dibujar(ventana)
-    gallina.dibujar(ventana)
 
 
     for event in  pygame.event.get():

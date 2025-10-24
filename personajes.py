@@ -40,27 +40,33 @@ class Personaje:
 # 1 cerdo , 2 vaca , 3 gallina
 
 class Animal:
-    def __init__(self,x,y,frames,area = None,velocidad = None):
-        #imagen solamente
-        self.frames = frames
+    def __init__(self, x, y, frames, area=None, velocidad=None, escala=0.5):
+        # Escalar todas las imágenes
+        self.frames = [
+            pygame.transform.scale(
+                frame,
+                (
+                    int(frame.get_width() * escala),
+                    int(frame.get_height() * escala)
+                )
+            )
+            for frame in frames
+        ]
+        
         self.frame_index = 0
         self.image = self.frames[self.frame_index]
         self.rect = self.image.get_rect(topleft=(x, y))
         
-
-        #control de animacion
+        # control de animacion
         self.anim_delay = 150
         self.anim_timer = 0
         self.facing_right = False
 
-        #movimiento aleatorio 
-        self.velocidad = velocidad
-        self.dx = rd.choice([-1,1])
-        self.dy = rd.choice([-1,1])
-        self.area = area if area else pygame.Rect(0,0,800,600)
-
-        #velocidad 
+        # movimiento aleatorio
         self.velocidad = velocidad if velocidad is not None else constantes.VELOCIDAD_ANIMALES
+        self.dx = rd.choice([-1, 1])
+        self.dy = rd.choice([-1, 1])
+        self.area = area if area else pygame.Rect(0, 0, 800, 600)
     
     def actualizar_animacion(self,dt):
         #cambiar el frame en automatico 
@@ -124,4 +130,16 @@ class Vaca(Animal):
             pygame.image.load(f"assets/images/animales/vaca/vaca_02.png"),
             pygame.image.load(f"assets/images/animales/vaca/vaca_03.png")
         ]
-        super().__init__(x,y,frames)
+        super().__init__(x,y,frames,escala=0.2)
+
+class Cerdo(Animal):
+    def __init__(self,x,y, area = None):
+        frames = [
+            pygame.image.load(f"assets/images/animales/cerdo/cerdo_01.png"),
+            pygame.image.load(f"assets/images/animales/cerdo/cerdo_02.png"),
+            pygame.image.load(f"assets/images/animales/cerdo/cerdo_03.png"),
+            pygame.image.load(f"assets/images/animales/cerdo/cerdo_04.png")
+            ]
+        super().__init__(x,y,frames,escala=0.2)
+    
+    
