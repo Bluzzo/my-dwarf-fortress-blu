@@ -109,10 +109,10 @@ class Animal:
 class Gallina(Animal):
     def __init__(self, x, y, area = None):
         frames = [
-            pygame.image.load(f"EDATACHI/assets/images/animales/gallina/gallina (1).png"),
-            pygame.image.load(f"EDATACHI/assets/images/animales/gallina/gallina (2).png") , 
-            pygame.image.load(f"EDATACHI/assets/images/animales/gallina/gallina (3).png"),
-            pygame.image.load(f"EDATACHI/assets/images/animales/gallina/gallina (4).png"),
-            pygame.image.load(f"EDATACHI/assets/images/animales/gallina/gallina (5).png")
+            pygame.image.load(f"assets/images/animales/gallina/gallina (1).png"),
+            pygame.image.load(f"assets/images/animales/gallina/gallina (2).png") , 
+            pygame.image.load(f"assets/images/animales/gallina/gallina (3).png"),
+            pygame.image.load(f"assets/images/animales/gallina/gallina (4).png"),
+            pygame.image.load(f"assets/images/animales/gallina/gallina (5).png")
             ]
         super().__init__(x,y,frames)
