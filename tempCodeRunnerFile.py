@@ -1,0 +1,1 @@
+gallina = Gallina(100,200,area = rangoGallina)
