@@ -2,8 +2,10 @@ import pygame
 import constantes
 from personajes import Personaje 
 from personajes import Gallina
+from personajes import Vaca
 from mundo import Mundo
 import csv
+
 
 pygame.init()
 
@@ -86,8 +88,10 @@ def ponerCasa(archivo, click_pos, nuevo_valor):
         escritor = csv.writer(f)
         escritor.writerows(datos)
     world_data[fila][columna] = nuevo_valor
-    
+
+#areas
 rangoGallina = pygame.Rect(100, 100, 400, 300)  # x, y, ancho, alto
+rangoVaca = pygame.Rect(100, 100, 400, 300) 
 
 gallina = Gallina(100,200,area = rangoGallina)
 gallinas = [
@@ -96,6 +100,12 @@ gallinas = [
     Gallina(200, 400, area=rangoGallina)
 ]
 gallinas.append(gallina)
+
+vacas = [
+    Vaca(100, 100, area=rangoVaca),
+    Vaca(300, 300, area=rangoVaca),
+    Vaca(200, 400, area=rangoVaca)
+]
 
 ###############################
 run = True
@@ -132,6 +142,11 @@ while run:
     print(f"{deltaX}, {deltaY}")
 
     world.draw(ventana)
+
+    for vaca in vacas:
+        vaca.update(dt)
+        vaca.dibujar(ventana)
+
 
     for gallina in gallinas:
         gallina.update(dt)
@@ -182,4 +197,4 @@ while run:
 
 
     pygame.display.update()
-pygame.quit()
+pygame.quit()   

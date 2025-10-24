@@ -1,1 +1,3 @@
-gallina = Gallina(100,200,area = rangoGallina)
+for gallina in gallinas:
+    #     gallina.update(dt)
+    #     gallina.dibujar(ventana)

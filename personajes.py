@@ -116,3 +116,12 @@ class Gallina(Animal):
             pygame.image.load(f"assets/images/animales/gallina/gallina (5).png")
             ]
         super().__init__(x,y,frames)
+
+class Vaca(Animal):
+    def __init__(self,x,y, area = None):
+        frames = [
+            pygame.image.load(f"assets/images/animales/vaca/vaca_01.png"),
+            pygame.image.load(f"assets/images/animales/vaca/vaca_02.png"),
+            pygame.image.load(f"assets/images/animales/vaca/vaca_03.png")
+        ]
+        super().__init__(x,y,frames)
