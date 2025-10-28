@@ -4,6 +4,7 @@ from personajes import Personaje
 from personajes import Gallina
 from personajes import Vaca
 from personajes import Cerdo
+from personajes import Japones
 from mundo import Mundo
 import csv
 
@@ -20,11 +21,11 @@ def escalar_img(image, scale):
     return nueva_imagen
 
 
-animaciones = []
-for i in range(3):
-    img = pygame.image.load(f"assets/images/characters/player/player {i} w.png")
-    img = escalar_img(img, constantes.ESCALA_PERSONAJE)
-    animaciones.append(img)
+# animaciones = []
+# for i in range(3):
+#     img = pygame.image.load(f"assets/images/characters/player/player {i} w.png")
+#     img = escalar_img(img, constantes.ESCALA_PERSONAJE)
+#     animaciones.append(img)
 
 
 tile_list = []
@@ -58,7 +59,7 @@ def dibujar_grid():
 
 player_image = pygame.image.load(f"assets/images/characters/player/player 2 w.png")
 player_image = escalar_img(player_image,constantes.ESCALA_PERSONAJE)
-jugador = Personaje(constantes.ANCHO_PERSONAJE,constantes.ANCHO_PERSONAJE,animaciones)
+# jugador = Personaje(constantes.ANCHO_PERSONAJE,constantes.ANCHO_PERSONAJE,animaciones)
 ventana = pygame.display.set_mode((constantes.ANCHO_VENTANA,constantes.ALTO_VENTANA))
 
 
@@ -94,6 +95,7 @@ def ponerCasa(archivo, click_pos, nuevo_valor):
 rangoGallina = pygame.Rect(150, 150, 200, 150)  # x, y, ancho, alto
 rangoVaca = pygame.Rect(100, 100, 400, 300) 
 rangoCerdo = pygame.Rect(150,125,300,100)
+rango_japones = pygame.Rect(100, 100, 600, 400)
 
 
 gallinas = [
@@ -122,13 +124,15 @@ cerdos = [
 
 ]
 
+japones = Japones(250, 250, area=rango_japones)
 
 ###############################
 run = True
 while run:
     dt = reloj.tick(constantes.FPS)
     ventana.fill(constantes.COLOR_FONDO)
-    
+    teclas = pygame.key.get_pressed()
+
     dibujar_grid()
 
     deltaX = 0
@@ -151,8 +155,8 @@ while run:
         return fila, columna
 
     #moverme
-    jugador.movimiento(deltaX,deltaY)
-    jugador.update()
+    # jugador.movimiento(deltaX,deltaY)
+    # jugador.update()
     
     print(f"{deltaX}, {deltaY}")
 
@@ -171,7 +175,10 @@ while run:
         cerdo.update(dt)
         cerdo.dibujar(ventana)
 
-    jugador.dibujar(ventana)
+    japones.update(dt, teclas)
+    japones.dibujar(ventana)  
+
+    # jugador.dibujar(ventana)
 
 
     for event in  pygame.event.get():
